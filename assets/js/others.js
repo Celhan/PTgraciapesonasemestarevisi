@@ -244,7 +244,7 @@ $(function() {
 
   $('.p50headerRightBtm ul li').each(function(){
     $(this).children('a').click(function(e){
-      e.preventDefault();
+      
       var targetId = $(this).attr('href');
       var targetElement = $(targetId);
       $('html, body').animate({
@@ -254,7 +254,7 @@ $(function() {
   })
   $('.p50headerRightTop ul li').each(function(){
     $(this).children('a').click(function(e){
-      e.preventDefault();
+     
       var targetId = $(this).attr('href');
       var targetElement = $(targetId);
       $('html, body').animate({
@@ -264,7 +264,7 @@ $(function() {
   })
   $('.p50headerRightBtmM ul li').each(function(){
     $(this).children('a').click(function(e){
-      e.preventDefault();
+     
       var targetId = $(this).attr('href');
       var targetElement = $(targetId);
       $('html, body').animate({
@@ -274,7 +274,7 @@ $(function() {
   })
 
   $('.p50headerLeft').click(function(e){
-    e.preventDefault();
+ 
       $('html, body').animate({
           scrollTop: $('.p50bannerContainer').offset().top
       }, 2000);
