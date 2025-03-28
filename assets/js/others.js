@@ -83,123 +83,123 @@ $(function() {
           // });
 
           $('.p50headerRightBurger').click(function(){
-              // console.log('p50headerRightBurger');
-              if(!$(this).siblings('.p50headerRightBtm').hasClass('show')){
-                  $(this).parent().parent().addClass('active');
-                  $(this).siblings('.p50headerRightBtm').addClass('show');
-                  $(this).siblings('.p50headerRightBtm').slideDown(300);
-                  $('body').addClass('noScrollbar');
-              } else {
-                  $(this).parent().parent().removeClass('active');
-                  $(this).siblings('.p50headerRightBtm').removeClass('show');
-                  $(this).siblings('.p50headerRightBtm').slideUp(300);
-                  $('body').removeClass('noScrollbar');
-              }
-          })
+            // console.log('p50headerRightBurger');
+            if(!$(this).siblings('.p50headerRightBtm').hasClass('show')){
+                $(this).parent().parent().addClass('active');
+                $(this).siblings('.p50headerRightBtm').addClass('show');
+                $(this).siblings('.p50headerRightBtm').slideDown(300);
+                $('body').addClass('noScrollbar');
+            } else {
+                $(this).parent().parent().removeClass('active');
+                $(this).siblings('.p50headerRightBtm').removeClass('show');
+                $(this).siblings('.p50headerRightBtm').slideUp(300);
+                $('body').removeClass('noScrollbar');
+            }
+        })
 
-          $('.p50headerRightBtm ul li').each(function(){
-            $(this).children('a').click(function(){
-              // console.log('Clicked!!!!')
-              $('.p50headerInner ').removeClass('active');
-              $('.p50headerRightBtm').removeClass('show');
-              $('.p50headerRightBtm').slideUp(300);
-              $('body').removeClass('noScrollbar');
+        $('.p50headerRightBtm ul li').each(function(){
+          $(this).children('a').click(function(){
+            // console.log('Clicked!!!!')
+            $('.p50headerInner ').removeClass('active');
+            $('.p50headerRightBtm').removeClass('show');
+            $('.p50headerRightBtm').slideUp(300);
+            $('body').removeClass('noScrollbar');
+          })
+        })
+    }
+
+}
+
+$( window ).resize(function() {
+    // // console.log($(window).width());
+
+    if($(window).width() > 1024){
+
+        // gsap.globalTimeline.resume();
+        // gsap.globalTimeline.progress(1).resume(); 
+
+        isDesktop = true;
+        isMobile = false;
+
+        // trigger close mobile navi
+        if($('.p50headerRightBurger').parent().hasClass('active')){
+            // console.log('p50headerRightBurger parent hasClass');
+            $('.p50headerRightBurger').click();
+        }
+        if($('.JhasSub a').hasClass('activeNavi')){
+            // console.log('JhasSub a hasClass');
+            $('.JhasSub a.activeNavi').click();
+        }
+
+        
+        if(isInitDesktop == true && isDesktop == true){
+            // console.log('isInitDesktop == true && isDesktop == true');
+        } else if(isInitDesktop == false && isDesktop == true){
+            // console.log('isDesktop:', isDesktop);
+            isInitMobile = false;
+            isInitDesktop = true;
+
+            $('.p50header').unbind( "mouseenter" );
+            $('.p50header').unbind( "mouseleave" );
+
+            $('.p50header').bind('mouseenter', function() {
+                $(this).addClass('active')
             })
-          })
-      }
+            .bind('mouseleave', function(){
+                $(this).removeClass('active')
+            });
 
-  }
+            // $('.JhasSub > a').bind('mouseenter', function() {
+            //     // console.log('subnavi2', $(this));
+            //     $(this).addClass('activeNavi');
+            //     $(this).siblings('div.JhasSubInner').show();
+            // }).bind('mouseleave', function(){
+            //     $(this).removeClass('activeNavi');
+            //     $(this).siblings('div.JhasSubInner').hide();
+            // });
 
-  $( window ).resize(function() {
-      // // console.log($(window).width());
+            // $('.JhasSubInner').bind('mouseenter', function() {
+            //     // console.log('subnavi');
+            //     $(this).siblings('a').addClass('activeNavi');
+            //     $(this).show();
+            // }).bind('mouseleave', function(){
+            //     $(this).siblings('a').removeClass('activeNavi');
+            //     $(this).hide();
+            // });
+        }
+        
 
-      if($(window).width() > 1024){
+    } else {
 
-          // gsap.globalTimeline.resume();
-          // gsap.globalTimeline.progress(1).resume(); 
+        // gsap.globalTimeline.pause();
+        // gsap.globalTimeline.progress(1).pause(); 
 
-          isDesktop = true;
-          isMobile = false;
+        isDesktop = false;
+        isMobile = true;
 
-          // trigger close mobile navi
-          if($('.p50headerRightBurger').parent().hasClass('active')){
-              // console.log('p50headerRightBurger parent hasClass');
-              $('.p50headerRightBurger').click();
-          }
-          if($('.JhasSub a').hasClass('activeNavi')){
-              // console.log('JhasSub a hasClass');
-              $('.JhasSub a.activeNavi').click();
-          }
+        
+        if(isInitMobile == true && isMobile == true){
+            // console.log('isInitMobile == true && isMobile == true');
+        } else if(isInitMobile == false && isMobile == true){
+            // console.log('isMobile:', isMobile, ' isDesktop:', isDesktop);
+            isInitMobile = true;
+            isInitDesktop = false;
 
-          
-          if(isInitDesktop == true && isDesktop == true){
-              // console.log('isInitDesktop == true && isDesktop == true');
-          } else if(isInitDesktop == false && isDesktop == true){
-              // console.log('isDesktop:', isDesktop);
-              isInitMobile = false;
-              isInitDesktop = true;
+            $('.JhasSub > a').unbind( "mouseenter" );
+            $('.JhasSub > a').unbind( "mouseleave" );
+            $('.JhasSubInner').unbind( "mouseenter" );
+            $('.JhasSubInner').unbind( "mouseleave" );
+            $( ".p50headerRightBurger" ).unbind();
+            $('.JhasSub > a').unbind();
 
-              $('.p50header').unbind( "mouseenter" );
-              $('.p50header').unbind( "mouseleave" );
-
-              $('.p50header').bind('mouseenter', function() {
-                  $(this).addClass('active')
-              })
-              .bind('mouseleave', function(){
-                  $(this).removeClass('active')
-              });
-
-              // $('.JhasSub > a').bind('mouseenter', function() {
-              //     // console.log('subnavi2', $(this));
-              //     $(this).addClass('activeNavi');
-              //     $(this).siblings('div.JhasSubInner').show();
-              // }).bind('mouseleave', function(){
-              //     $(this).removeClass('activeNavi');
-              //     $(this).siblings('div.JhasSubInner').hide();
-              // });
-
-              // $('.JhasSubInner').bind('mouseenter', function() {
-              //     // console.log('subnavi');
-              //     $(this).siblings('a').addClass('activeNavi');
-              //     $(this).show();
-              // }).bind('mouseleave', function(){
-              //     $(this).siblings('a').removeClass('activeNavi');
-              //     $(this).hide();
-              // });
-          }
-          
-
-      } else {
-
-          // gsap.globalTimeline.pause();
-          // gsap.globalTimeline.progress(1).pause(); 
-
-          isDesktop = false;
-          isMobile = true;
-
-          
-          if(isInitMobile == true && isMobile == true){
-              // console.log('isInitMobile == true && isMobile == true');
-          } else if(isInitMobile == false && isMobile == true){
-              // console.log('isMobile:', isMobile, ' isDesktop:', isDesktop);
-              isInitMobile = true;
-              isInitDesktop = false;
-
-              $('.JhasSub > a').unbind( "mouseenter" );
-              $('.JhasSub > a').unbind( "mouseleave" );
-              $('.JhasSubInner').unbind( "mouseenter" );
-              $('.JhasSubInner').unbind( "mouseleave" );
-              $( ".p50headerRightBurger" ).unbind();
-              $('.JhasSub > a').unbind();
-
-              $('.p50header').unbind( "mouseenter" );
-              $('.p50header').unbind( "mouseleave" );
-              $('.p50header').bind('mouseenter', function() {
-                  $(this).addClass('active')
-              })
-              .bind('mouseleave', function(){
-                  $(this).removeClass('active')
-              });
+            $('.p50header').unbind( "mouseenter" );
+            $('.p50header').unbind( "mouseleave" );
+            $('.p50header').bind('mouseenter', function() {
+                $(this).addClass('active')
+            })
+            .bind('mouseleave', function(){
+                $(this).removeClass('active')
+            });
 
 
               // $('.JhasSub > a').click(function(e){
@@ -244,7 +244,7 @@ $(function() {
 
   $('.p50headerRightBtm ul li').each(function(){
     $(this).children('a').click(function(e){
-      
+      e.preventDefault();
       var targetId = $(this).attr('href');
       var targetElement = $(targetId);
       $('html, body').animate({
@@ -254,7 +254,7 @@ $(function() {
   })
   $('.p50headerRightTop ul li').each(function(){
     $(this).children('a').click(function(e){
-     
+      e.preventDefault();
       var targetId = $(this).attr('href');
       var targetElement = $(targetId);
       $('html, body').animate({
@@ -264,7 +264,7 @@ $(function() {
   })
   $('.p50headerRightBtmM ul li').each(function(){
     $(this).children('a').click(function(e){
-     
+      e.preventDefault();
       var targetId = $(this).attr('href');
       var targetElement = $(targetId);
       $('html, body').animate({
@@ -274,7 +274,7 @@ $(function() {
   })
 
   $('.p50headerLeft').click(function(e){
- 
+    e.preventDefault();
       $('html, body').animate({
           scrollTop: $('.p50bannerContainer').offset().top
       }, 2000);
@@ -653,35 +653,6 @@ $(function() {
   }
 
 
-  // Hightlight Test02
-  // const splitText = new SplitText(".p50c2Content p", {
-  //   type: "lines",
-  //   linesClass: "line" 
-  // });
-
-  // const tl = gsap.timeline({
-  //   scrollTrigger: {
-  //     trigger: ".p50c2Content",
-  //     scrub: 1,
-  //     start: "top 65%",
-  //     end: "bottom 65%",
-  //     markers: true 
-  //   } 
-  // });
-
-  // // tl.from(".line", {
-  // //   x: -100,
-  // //   stagger: 0.5 
-  // // });
-
-  // tl.to(".line", {
-  //   // duration: 1,
-  //   "--highlight-offset": "100%",
-  //   stagger: 0.5 
-  // }, "<+=0.3"
-  // );
-
-
   var owl01 = $('.p50c3Swiper');
   owl01.on('initialize.owl.carousel', function(event) {
     // console.log('p50c3Swiper initialize');
@@ -821,13 +792,18 @@ $(function() {
   //   }
       
   // });
+
   var resizeTicker = true;
   if ($(window).width() <= 1024) {
      resizeTicker = false;
-  } else { 
-     resizeTicker = true;
+     // console.log('Less than 1024', resizeTicker);
   }
-  
+  else { 
+     resizeTicker = true;
+     // console.log('More than 1024', resizeTicker);
+  }
+
+
   let mainTicker = new Flickity('.p50c4Carousel01F', {
     accessibility: true,
     resize: resizeTicker,
@@ -848,28 +824,46 @@ $(function() {
     ],
     on: {
         ready: function() {
+          // console.log('Flickity is ready');
+
+
+
+          // console.log('p50c4Carousel01 initialize');
           $('.p50c4Carousel01 .b-slider__slide').each(function(){
             $(this).mouseover(function(){
+              // console.log($(this).attr('class'));
             }).mouseleave(function(){
+              // console.log('LEAVED!');
             });
-  
-            // Ambil gambar dari data-img
-            let imgSrc = $(this).find('.p50generalBtn').attr('data-img');
-  
-            // Jika data-img kosong, pakai gambar default
-            if (!imgSrc) {
-                imgSrc = '/assets/images/default-image.jpg';
-            }
-  
-            // Set gambar sebagai background
-            $(this).find('.p50c4SwiperBG').css('background-image', 'url('+ imgSrc +')');
-          });
+
+            // // console.log($(this).attr('class'));
+            let ytID = $(this).children().children('.p50c4SwiperInner').children('.p50generalBtn')
+            // console.log('ytID: ', ytID);
+
+            let ytCover = 'https://img.youtube.com/vi/'+ytID+'/maxresdefault.jpg';
+            $(this).children().children('.p50c4SwiperBG')
+            // console.log('ytCover: ', ytCover);
+
+            $(this).children().children('.p50c4SwiperInner').children('.p50generalBtn').click(function(e){
+              e.preventDefault();
+              var ID = $(this).attr('href');
+              $(document).find( $(this).attr('href') ).fadeIn(300);
+              $('body').addClass('noScrollbar');
+              // console.log('ID: ', ID);
+
+              var tempTYurl = 'https://www.youtube.com/embed/' + $(this).data("yt") + '?enablejsapi=1&version=3&playerapiid=ytplayer&mute=0';
+              // console.log('clicked!!', $(this).data("yt"), $(this).data("yt-img"), tempTYurl);
+              $(ID).children('.JlightboxContainerInner').children().children().children().children('iframe').attr('src',tempTYurl);
+              $(ID).children('.JlightboxContainerInner').children().children().children().children('iframe')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
+            })
+          })
         },
         change: function( index ) {
+          // console.log( 'Slide changed to' + index );
         }
       }
   });
-  
+
   let mainTicker02 = new Flickity('.p50c4Carousel02F', {
     accessibility: true,
     resize: resizeTicker,
@@ -889,24 +883,37 @@ $(function() {
     ],
     on: {
         ready: function() {
+          // console.log('Flickity is ready');
+
+          // console.log('p50c4Carousel02 initialize');
           $('.p50c4Carousel02 .b-slider__slide').each(function(){
-            // Ambil gambar dari data-img
-            let imgSrc = $(this).find('.p50generalBtn').attr('data-img');
-  
-            // Jika data-img kosong, pakai gambar default
-            if (!imgSrc) {
-                imgSrc = '/assets/images/default-image.jpg';
-            }
-  
-            // Set gambar sebagai background
-            $(this).find('.p50c4SwiperBG').css('background-image', 'url('+ imgSrc +')');
-          });
+            // // console.log($(this).attr('class'));
+            let ytID = $(this).children().children('.p50c4SwiperInner').children('.p50generalBtn')
+            // console.log('ytID: ', ytID);
+
+            let ytCover = 'https://img.youtube.com/vi/'+ytID+'/maxresdefault.jpg';
+            $(this).children().children('.p50c4SwiperBG')
+            // console.log('ytCover: ', ytCover);
+
+            $(this).children().children('.p50c4SwiperInner').children('.p50generalBtn').click(function(e){
+              e.preventDefault();
+              var ID = $(this).attr('href');
+              $(document).find( $(this).attr('href') ).fadeIn(300);
+              $('body').addClass('noScrollbar');
+              // console.log('ID: ', ID);
+
+              var tempTYurl = 'https://www.youtube.com/embed/' + $(this).data("yt") + '?enablejsapi=1&version=3&playerapiid=ytplayer&mute=0';
+              // console.log('clicked!!', $(this).data("yt"), $(this).data("yt-img"), tempTYurl);
+              $(ID).children('.JlightboxContainerInner').children().children().children().children('iframe').attr('src',tempTYurl);
+              $(ID).children('.JlightboxContainerInner').children().children().children().children('iframe')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
+            })
+          })
         },
         change: function( index ) {
+          // console.log( 'Slide changed to' + index );
         }
       }
   });
-  
 
   let mainTicker03 = new Flickity('.p50c9Carousel01F', {
     accessibility: true,
@@ -2706,15 +2713,15 @@ $(function() {
       // "image": "./assets/images/icon01.svg",
       "children": [
         {
-            "month": "ELJE EL POWER SERIES 10-800kVA",
-            "date": "",
-            "event": "UPS yang dilengkapi dengan konversi ganda online, kontrol DSP penuh, dan manajemen baterai yang dioptimalkan untuk efisiensi tinggi. Dengan redundansi paralel N+X, berbagai proteksi, mode generator, isolasi galvanik, serta manajemen jaringan yang mudah digunakan, UPS ini menawarkan keandalan dan fleksibilitas luar biasa.",
-            "location": "Online Double Conversion, Full DSP Control, High Power Factor, Optimized Battery Management, N+X Parallel Redundancy, Multi-Protection.",
-            "region": "Wide Input Adaptability, Generator Mode, EPO Function/ LCD Display, Galvanic Isolation, User-Friendly Network Management.",
+            "detail": "ELJE JE-R SERIES",
+            "date": "30",
+            "event": "Discover PETRONAS @ Schools",
+            "location": "Labuan",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [10],
-            "tooltipsdesc": "UPS yang dilengkapi dengan konversi ganda online, kontrol DSP penuh, dan manajemen baterai yang dioptimalkan untuk efisiensi tinggi. Dengan redundansi paralel N+X, berbagai proteksi, mode generator, isolasi galvanik, serta manajemen jaringan yang mudah digunakan, UPS ini menawarkan keandalan dan fleksibilitas luar biasa.",
+            "tooltipsdesc": "Discover PETRONAS @ Schools",
             "xPos": 71,
             "yPos": 28,
             "xPosInner": 57,
@@ -2727,16 +2734,16 @@ $(function() {
             "yPathInner":"0",
         },
         {
-            "month": "ELJE EL POWER SE-T SERIES 10-800kVA",
-            "date": "",
+            "month": "May",
+            "date": "2",
             // "date": "TBC",
-            "event": "UPS yang menggunakan kontrol ganda DSP untuk meningkatkan stabilitas dan keandalan sistem, dan kecocokan beban yang optimal. Manajemen baterai cerdas dan teknologi pengisian otomatis yang canggih mengurangi kebutuhan pemeliharaan, serta menawarkan konfigurasi voltase baterai yang fleksibel. Desain redundan paralel N+X mendukung hingga 6 unit, memungkinkan fleksibilitas konfigurasi yang tinggi. Fitur tambahan termasuk mode generator, sinkronisasi LBS, fungsi EPO, dan manajemen jaringan yang user-friendly.",
-            "location": "Double DSP control makes the whole system more stable and reliable, The output power factor up to 0.9 better matches the load, Intelligent battery management and advanced battery auto float/boost charge technology, reduces the frequency of battery maintenance, Flexible battery voltage configuration.",
-            "region": "N+X parallel redundant design, up to 6 units available, makes the configuration more flexible, Generator mode, LBS synschronization, EPO function, User friendly network management.",
+            "event": "Melaka Energy Park launch in conjunction with Malaysian Refining Company Sdn. Bhd. (MRCSB) 30th Anniversary",
+            "location": "Sg. Udang, Melaka",
+            "region": "Southern & East Coast",
             "istorch": false,
             "istorchcompleted": true,
             "tooltipicon": [2],
-            "tooltipsdesc": "UPS yang menggunakan kontrol ganda DSP untuk meningkatkan stabilitas dan keandalan sistem, dan kecocokan beban yang optimal. Manajemen baterai cerdas dan teknologi pengisian otomatis yang canggih mengurangi kebutuhan pemeliharaan, serta menawarkan konfigurasi voltase baterai yang fleksibel. Desain redundan paralel N+X mendukung hingga 6 unit, memungkinkan fleksibilitas konfigurasi yang tinggi. Fitur tambahan termasuk mode generator, sinkronisasi LBS, fungsi EPO, dan manajemen jaringan yang user-friendly.",
+            "tooltipsdesc": "Melaka Energy Park launch in conjunction with Malaysian Refining Company Sdn. Bhd. (MRCSB) 30th Anniversary",
             // "xPos": 16,
             // "yPos": 75,
             "xPos": 17.5,
@@ -2753,15 +2760,15 @@ $(function() {
             "yPathInner":"0",
         },
         {
-            "month": "ELX SERIES 1-10kVA",
-            "date": "",
-            "event": "UPS outdoor untuk jaringan komunikasi marginal, dirancang khusus untuk sistem komunikasi nirkabel pada stasiun basis mikro seluler outdoor. Sistem ini merupakan UPS online terintegrasi berkinerja tinggi yang sangat cocok untuk penggunaan di luar ruangan, menawarkan teknologi mutakhir dan kepraktisan yang sangat tinggi.",
-            "location": "Provide continuous pure sine wave AC power supply for outside communications/ network equipment, Double-conversion online design, high temperature resistant, anti-cold, Using microprocessor control, to simplify the UPS control circuit, to improve the stability, Using digital control techniques, to avoid the traditional analog control temperature drift inherent defects such as hardware parameters, to ensure consistency and reliability of UPS.",
-            "region": "This UPS is commonly used in the corner of the city, remote roads, mountains, bad environment, such as high temperature (+50 C)/ low temperature (-40 C), severe dust, moisture, rain, erosion, very poor power quality areas, Fine dust-proof, water-proof features",
+            "month": "May",
+            "date": "5",
+            "event": "Convoy from PETRONAS station Tanjung Agas to PETRONAS station Kesang and to Tangkak Cub Prix.<br/><br/>Cub Prix Activation at Tangkak Circuit",
+            "location": "Tanjung Agas, Johor",
+            "region": "Southern & East Coast",
             "istorch": false,
             "istorchcompleted": true,
             "tooltipicon": [5],
-            "tooltipsdesc": "UPS outdoor untuk jaringan komunikasi marginal, dirancang khusus untuk sistem komunikasi nirkabel pada stasiun basis mikro seluler outdoor. Sistem ini merupakan UPS online terintegrasi berkinerja tinggi yang sangat cocok untuk penggunaan di luar ruangan, menawarkan teknologi mutakhir dan kepraktisan yang sangat tinggi.",
+            "tooltipsdesc": "Convoy from PETRONAS station Tanjung Agas to PETRONAS station Kesang and to Tangkak Cub Prix<br/><br/>Cub Prix Activation at Tangkak Circuit",
             "xPos": 20,
             "yPos": 79,
             "xPosInner": 41,
@@ -2805,15 +2812,15 @@ $(function() {
         //     "yPosInner": 86,
         // },
         {
-            "month": "ELJE JE-R 1-3kVA SERIES",
-            "date": "",
-            "event": "UPS yang memiliki desain konvertibel antara rack dan tower, dengan konversi ganda online dan kontrol digital penuh. Dengan rentang voltase input yang luas, pengisi daya pintar untuk baterai, fungsi EPO, regulasi kecepatan kipas cerdas, mode ECO untuk hemat energi, kompatibilitas generator, cold start, baterai hot-swappable, antarmuka LCD yang serbaguna, serta berbagai fungsi proteksi, UPS ini menawarkan fleksibilitas, efisiensi, dan keamanan yang optimal.",
-            "location": "Rack/Tower convertible design, Online double conversion with full digital control, Wide input voltage range 110~300Vac, Smart charger design for optimized battery performance, Emergency power off function (EPO), Inteligent fan speed regulation",
-            "region": "ECO mode operation for energy savinf, Generator compatible, Cold start, Hot-Swappable battery design, Versatile LCD human-computer interface, Multiple protection function",
+            "month": "May",
+            "date": "21-22",
+            "event": "Pulau Banggi Community Thanksgiving",
+            "location": "Kudat",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [1],
-            "tooltipsdesc": "UPS yang memiliki desain konvertibel antara rack dan tower, dengan konversi ganda online dan kontrol digital penuh. Dengan rentang voltase input yang luas, pengisi daya pintar untuk baterai, fungsi EPO, regulasi kecepatan kipas cerdas, mode ECO untuk hemat energi, kompatibilitas generator, cold start, baterai hot-swappable, antarmuka LCD yang serbaguna, serta berbagai fungsi proteksi, UPS ini menawarkan fleksibilitas, efisiensi, dan keamanan yang optimal.",
+            "tooltipsdesc": "Pulau Banggi Community Thanksgiving",
             "xPos": 82,
             "yPos": 1,
             "xPosInner": 74,
@@ -2826,15 +2833,15 @@ $(function() {
             "yPathInner":"-600",
         },
         {
-            "month": "ELJE JE-R 6-10kVA SERIES",
-            "date": "",
-            "event": "UPS yang mendukung desain konvertibel rack/tower dan menggunakan konversi ganda online dengan kontrol DSP. Dengan rentang voltase input yang luas, fungsi EPO, regulasi kecepatan kipas cerdas, dukungan operasi 3/1 dan 1/1, mode ECO untuk penghematan energi, kompatibilitas generator, cold start, berbagai fungsi proteksi, dan pengujian mandiri saat startup, serta opsi konfigurasi baterai yang optimal, UPS ini menawarkan fleksibilitas, efisiensi, dan keamanan yang unggul.",
-            "location": "LCD supports Rack/Tower convertible design, Online double conversion with DSP control, Wide input voltage range 208~478Vac, Emergency power off function (EPO), Inteligent fan speed regulation, Support 3/1 and 1/1 operation",
-            "region": "ECO mode operation for energy saving, Gerator compatible, Cold start, Multiple protection function, Self testing when UPS Startup, Optimization battery group, the quantity of battery: 16/18/20pcs (32~40pcs supportable)",
+            "month": "May",
+            "date": "25",
+            "event": "PETRONAS Sabah Family Fun & Wellness Day",
+            "location": "Kota Kinabalu",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [7, 16],
-            "tooltipsdesc": "UPS yang mendukung desain konvertibel rack/tower dan menggunakan konversi ganda online dengan kontrol DSP. Dengan rentang voltase input yang luas, fungsi EPO, regulasi kecepatan kipas cerdas, dukungan operasi 3/1 dan 1/1, mode ECO untuk penghematan energi, kompatibilitas generator, cold start, berbagai fungsi proteksi, dan pengujian mandiri saat startup, serta opsi konfigurasi baterai yang optimal, UPS ini menawarkan fleksibilitas, efisiensi, dan keamanan yang unggul.",
+            "tooltipsdesc": "PETRONAS Sabah Family Fun & Wellness Day",
             "xPos": 76,
             "yPos": 21,
             "xPosInner": 64,
@@ -2847,15 +2854,15 @@ $(function() {
             "yPathInner":"81",
         },
         {
-            "month": "ELJE JE-R SERIES",
-            "date": "",
-            "event": "UPS yang memiliki densitas daya tinggi dan desain konvertibel rack/tower dengan dukungan LCD. Menggunakan konversi ganda on-line dengan kontrol digital penuh, UPS ini memiliki rentang voltase input yang luas (110~286Vac) dan rentang frekuensi input yang lebar. Fitur tambahan meliputi regulasi kecepatan kipas cerdas, beberapa antarmuka komunikasi, mode ECO untuk penghematan energi, pengujian mandiri saat startup, kompatibilitas generator, cold start, berbagai fungsi proteksi, dan konfigurasi baterai yang dapat dioptimalkan (16/18/20 pcs).",
-            "location": "High Power Density, LCD supports Rack/Tower convertible design, Online double conversion with full digital control, Wide input voltage range 110~286Vac, Wide input frequency range, Inteligent fan speed regulation, Multiple Communication Interface.",
-            "region": "ECO mode operation for energy saving, Self testing when UPS Startup, Generator compatible, Cold start, Multiple protection function, Optimization battery group, the quantity of battery: 16/18/20pcs (settable).",
+            "month": "May",
+            "date": "30-31",
+            "event": "Kaamatan Celebration",
+            "location": "Kota Kinabalu",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [4, 10],
-            "tooltipsdesc": "UPS yang memiliki densitas daya tinggi dan desain konvertibel rack/tower dengan dukungan LCD. Menggunakan konversi ganda on-line dengan kontrol digital penuh, UPS ini memiliki rentang voltase input yang luas (110~286Vac) dan rentang frekuensi input yang lebar. Fitur tambahan meliputi regulasi kecepatan kipas cerdas, beberapa antarmuka komunikasi, mode ECO untuk penghematan energi, pengujian mandiri saat startup, kompatibilitas generator, cold start, berbagai fungsi proteksi, dan konfigurasi baterai yang dapat dioptimalkan (16/18/20 pcs)",
+            "tooltipsdesc": "Kaamatan Celebration",
             "xPos": 79,
             "yPos": 11,
             "xPosInner": 69,
@@ -2868,15 +2875,15 @@ $(function() {
             "yPathInner":"-140",
         },
         {
-            "month": "ELJE ELS 31 SERIES",
-            "date": "",
-            "event": "UPS yang menggabungkan desain on-line konversi ganda dengan waktu transfer nol dan kontrol modular dual-CPU, memberikan perlindungan unggul terhadap kelebihan beban dan kerusakan. Dengan fitur pencatatan log, diagnosis mandiri, dan kemampuan untuk koneksi paralel, UPS ini menawarkan keandalan tinggi dan fleksibilitas sistem yang luar biasa.",
-            "location": "Double conversion on-line design, Zero transfer time of output, Modular design and dual-CPU control, Provides a strong protection againt overload and fault, Events log can be record in the LCD panel.",
+            "month": "June",
+            "date": "7-8",
+            "event": "Solar Photovoltaic (PV) installation",
+            "location": "Kg. Org Asli Berasau, Johor",
             "region": "Southern & East Coast",
             "istorch": false,
             "istorchcompleted": true,
             "tooltipicon": [8],
-            "tooltipsdesc": "UPS yang menggabungkan desain on-line konversi ganda dengan waktu transfer nol dan kontrol modular dual-CPU, memberikan perlindungan unggul terhadap kelebihan beban dan kerusakan. Dengan fitur pencatatan log, diagnosis mandiri, dan kemampuan untuk koneksi paralel, UPS ini menawarkan keandalan tinggi dan fleksibilitas sistem yang luar biasa.",
+            "tooltipsdesc": "Solar Photovoltaic (PV) installation",
             "xPos": 28,
             "yPos": 80,
             "xPosInner": 86,
@@ -2889,15 +2896,15 @@ $(function() {
             "yPathInner":"60",
         },
         {
-            "month": "ELJE ELS SERIES 1kVA-20kVA",
-            "date": "",
-            "event": "UPS yang menggunakan desain konversi ganda online, penguncian fase, dan regulasi voltase. Dilengkapi dengan fungsi cold start baterai dan rentang input yang luas, UPS ini menghindari perpindahan ke mode baterai secara sering. Teknologi pengisian canggih memperpanjang umur baterai, sementara transformator isolasi bawaan memberikan perlindungan anti-interferensi yang kuat. Fitur tambahan termasuk diagnosis mandiri sebelum start-up, berbagai perlindungan, saklar bypass elektronik, fungsi DC Start, dan manajemen jaringan yang mudah digunakan.",
-            "location": "Double conversion on-line design, which makes the output a pure sine wave source with tracking frequency, phase-lock and voltage regulation, and low distortion, Battery cold start function, Wide input range up to: 165~275Vac, avoid frequently switching to battery mode, Advanced floating switching and charging technology, saves the charging time and extends the battery life.",
-            "region": "Built-in isolation transformer, strong anti-interference ability, provides more comprehensive protection, Self-diagnosis function before start-up, avoid the risks that the failure may lead to, The multi-protections, such as overload, short-circuit, over-temperature, battery under voltage, battery over-charge and so on, Built-in static electronic bypass switch, when UPS fails, DC Start function, User-friendly network management.",
+            "month": "June",
+            "date": "8",
+            "event": "PETRONAS 50 Celebration at Sandakan Station",
+            "location": "Sandakan",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [5],
-            "tooltipsdesc": "UPS yang menggunakan desain konversi ganda online, penguncian fase, dan regulasi voltase. Dilengkapi dengan fungsi cold start baterai dan rentang input yang luas, UPS ini menghindari perpindahan ke mode baterai secara sering. Teknologi pengisian canggih memperpanjang umur baterai, sementara transformator isolasi bawaan memberikan perlindungan anti-interferensi yang kuat. Fitur tambahan termasuk diagnosis mandiri sebelum start-up, berbagai perlindungan, saklar bypass elektronik, fungsi DC Start, dan manajemen jaringan yang mudah digunakan.",
+            "tooltipsdesc": "PETRONAS 50 Celebration at Sandakan Station",
             "xPos": 85,
             "yPos": 20,
             "xPosInner": 80,
@@ -2910,15 +2917,15 @@ $(function() {
             "yPathInner":"90",
         },
         {
-            "month": "ELJE MIKRO SERIES",
-            "date": "",
-            "event": "UPS ini dirancang khusus untuk Personal Computer dengan multi-fungsi. Bobotnya yang ringan dan desainnya yang ringkas sangat cocok untuk pekerjaan terbatas lingkungan.Jalur UPS dilengkapi dengan satu boost dan satu buck AVR untuk menstabilkan rentang tegangan input. Ini juga terintegrasi dengan fungsi start DC. Fungsi ini memungkinkan UPS dihidupkan tanpa pasokan listrik AC.",
-            "location": "Line Interactive UPS with simulated sinewave output, Excellent microprocessor control guarantees high reliability (Internal self-diagnostic technology), Boost and buck AVR for voltage stabilization (One boost and one buck control), Auto restart while AC is recovering.",
-            "region": "Cold start function, Off-mode charging, Fast intelligent battery recharge function, Offering LED and LCD panels for selections, Optional Generator compatible, Optional USB/RS232 communication port and RJ11/RJ45 protection.",
+            "month": "June",
+            "date": "12",
+            "event": "Discover PETRONAS @ Schools",
+            "location": "Ranau",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [10],
-            "tooltipsdesc": "UPS ini dirancang khusus untuk Personal Computer dengan multi-fungsi. Bobotnya yang ringan dan desainnya yang ringkas sangat cocok untuk pekerjaan terbatas lingkungan.Jalur UPS dilengkapi dengan satu boost dan satu buck AVR untuk menstabilkan rentang tegangan input. Ini juga terintegrasi dengan fungsi start DC. Fungsi ini memungkinkan UPS dihidupkan tanpa pasokan listrik AC.",
+            "tooltipsdesc": "Discover PETRONAS @ Schools",
             "xPos": 82,
             "yPos": 16,
             "xPosInner": 75,
@@ -2952,15 +2959,15 @@ $(function() {
         //     "yPathInner":"0",
         // },
         {
-            "month": "ELJE ELPRO Series 1kVA-3kVA",
-            "date": "",
-            "event": "High Power density. Online double conversion with full digital control. Wide input voltage range: 110~300Vac. Input power factor 0.99 with PFC. Smart charger design for optimized battery performance. Maximum charging current can be expanded to 12 A (long run unit). Multiple protection function. Multiple communication interface. Emergency power off function (EPO). ECO mode operation for energy saving. Generator compatible. Cold start. Intelligent fan speed regulation. Versatile LCD human-computer interface.",
-            "location": "High Power density, Online double conversion with full digital control, Wide input voltage range: 110~300Vac, Input power factor 0.99 with PFC, Smart charger design for optimized battery performance, Maximum charging current can be expanded to 12 A (long run unit), Multiple protection function, Multiple communication interface.",
-            "region": "Emergency power off function (EPO), ECO mode operation for energy saving, Generator compatible, Cold start, Intelligent fan speed regulation, Versatile LCD human-computer interface.",
+            "month": "June",
+            "date": "20-22",
+            "event": "Imbak Canyon Scientific Expedition",
+            "location": "Tongod",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [19],
-            "tooltipsdesc": "High Power density. Online double conversion with full digital control. Wide input voltage range: 110~300Vac. Input power factor 0.99 with PFC. Smart charger design for optimized battery performance. Maximum charging current can be expanded to 12 A (long run unit). Multiple protection function. Multiple communication interface. Emergency power off function (EPO). ECO mode operation for energy saving. Generator compatible. Cold start. Intelligent fan speed regulation. Versatile LCD human-computer interface.",
+            "tooltipsdesc": "Imbak Canyon Scientific Expedition",
             "xPos": 85,
             "yPos": 29,
             "xPosInner": 79,
@@ -2973,15 +2980,15 @@ $(function() {
             "yPathInner":"80",
         },
         {
-            "month": "ELJE ELPRO Series 6kVA-10kVA",
-            "date": "",
-            "event": "UPS outdoor untuk jaringan komunikasi marginal, dirancang khusus untuk sistem komunikasi nirkabel pada stasiun basis mikro seluler outdoor. Sistem ini merupakan UPS online terintegrasi berkinerja tinggi yang sangat cocok untuk penggunaan di luar ruangan, menawarkan teknologi mutakhir dan kepraktisan yang sangat tinggi.",
-            "location": "High Power density, Online double conversion with full digital control, Wide input voltage range: 110~300Vac, Input power factor 0.99 with PFC, Smart charger design for optimized battery performance, Maximum charging current can be expanded to 12 A (long run unit), Multiple protection function, Multiple communication interface.",
-            "region": "Emergency power off function (EPO), ECO mode operation for energy saving, Generator compatible, Cold start, Intelligent fan speed regulation, Versatile LCD human-computer interface.",
+            "month": "June",
+            "date": "22",
+            "event": "Orchid Run & Ride and Southern Family Run & Wellness Day",
+            "location": "Iskandar Puteri, Johor",
+            "region": "Southern & East Coast",
             "istorch": false,
             "istorchcompleted": true,
             "tooltipicon": [7,17],
-            "tooltipsdesc": "UPS outdoor untuk jaringan komunikasi marginal, dirancang khusus untuk sistem komunikasi nirkabel pada stasiun basis mikro seluler outdoor. Sistem ini merupakan UPS online terintegrasi berkinerja tinggi yang sangat cocok untuk penggunaan di luar ruangan, menawarkan teknologi mutakhir dan kepraktisan yang sangat tinggi.",
+            "tooltipsdesc": "Orchid Run & Ride and Southern Family Run & Wellness Day",
             "xPos": 23.5,
             "yPos": 88,
             "xPosInner": 65,
@@ -2994,15 +3001,15 @@ $(function() {
             "yPathInner":"150",
         },
         {
-            "month": "ELJE SE Series 10-40KVA",
-            "date": "",
-            "event": "Produk ini adalah UPS dengan densitas daya tinggi yang mendukung redundansi paralel N+X hingga 4 unit, serta menggunakan konversi ganda secara online dengan kontrol DSP. Produk ini memiliki rentang tegangan input yang luas (208-478V AC) dan rentang frekuensi input yang lebar (40-70Hz). Dengan arus pengisian maksimum hingga 20A dan kemampuan untuk menerima dua sumber input (opsional untuk unit standar), produk ini dioptimalkan untuk kelompok baterai yang lebih efisien. Fitur perlindungan yang lengkap, berbagai antarmuka komunikasi, dan kompatibilitas dengan generator meningkatkan keandalannya. Mode ECO untuk penghematan energi, self-testing saat startup, cold start, regulasi kecepatan kipas yang cerdas, dan kemampuan output untuk memenuhi beban tidak seimbang hingga 100% menjadikan produk ini sangat fleksibel dan andal.",
-            "location": "High Power density, N+X parallel redundancy, support maximum 4 units in parallel, Online double conversion with DSP control, Wide input voltage range: 208~478Vac, Wide input frequency range: 40~70Hz, Optimization battery group, Maximum charging current up to 20A, Dual input source (optional for standard unit), Multiple protection function, Multiple communication interface.",
-            "region": "Generator compatible, ECO mode operation for energy saving, Self-testing when UPS startup,Cold start, Intelligent fan speed regulation, The output can meet 100% unbalanced load.",
+            "month": "June",
+            "date": "23-26",
+            "event": "Solar Energy Installation",
+            "location": "Laban Rata",
+            "region": "Sabah & Sarawak",
             "istorch": true,
             "istorchcompleted": false,
             "tooltipicon": [19],
-            "tooltipsdesc": "Produk ini adalah UPS dengan densitas daya tinggi yang mendukung redundansi paralel N+X hingga 4 unit, serta menggunakan konversi ganda secara online dengan kontrol DSP. Produk ini memiliki rentang tegangan input yang luas (208-478V AC) dan rentang frekuensi input yang lebar (40-70Hz). Dengan arus pengisian maksimum hingga 20A dan kemampuan untuk menerima dua sumber input (opsional untuk unit standar), produk ini dioptimalkan untuk kelompok baterai yang lebih efisien. Fitur perlindungan yang lengkap, berbagai antarmuka komunikasi, dan kompatibilitas dengan generator meningkatkan keandalannya. Mode ECO untuk penghematan energi, self-testing saat startup, cold start, regulasi kecepatan kipas yang cerdas, dan kemampuan output untuk memenuhi beban tidak seimbang hingga 100% menjadikan produk ini sangat fleksibel dan andal.",
+            "tooltipsdesc": "Solar Energy Installation",
             "xPos": 80,
             "yPos": 23,
             "xPosInner": 70,
@@ -3015,15 +3022,15 @@ $(function() {
             "yPathInner":"-90",
         },
         {
-            "month": "ELJE SE Series 50-200KVA",
-            "date": "",
-            "event": "UPS outdoor untuk jaringan komunikasi marginal, dirancang khusus untuk sistem komunikasi nirkabel pada stasiun basis mikro seluler outdoor. Sistem ini merupakan UPS online terintegrasi berkinerja tinggi yang sangat cocok untuk penggunaan di luar ruangan, menawarkan teknologi mutakhir dan kepraktisan yang sangat tinggi.",
-            "location": "High reliability design, High input power factor, it can be up to 0.99, Support parallel expanded operation: maximum is 6 units, Support sharing batteries for the UPS in parallel, Large charging current can meet the requirement of long time backup.",
-            "region": "High adaptability for load, it can connect full inductive load or capacitive load, Power walk in function, it can reduce the start current impact to system, and it can reduce the capacity of generator, LBS function can realize 2 independent UPS system work in synchronization, and it enhances the reliability of the system.",
+            "month": "June",
+            "date": "29",
+            "event": "Badminton Tournament with the community",
+            "location": "Bandar Penawar, Johor",
+            "region": "Southern & East Coast",
             "istorch": false,
             "istorchcompleted": true,
             "tooltipicon": [11],
-            "tooltipsdesc": "UPS outdoor untuk jaringan komunikasi marginal, dirancang khusus untuk sistem komunikasi nirkabel pada stasiun basis mikro seluler outdoor. Sistem ini merupakan UPS online terintegrasi berkinerja tinggi yang sangat cocok untuk penggunaan di luar ruangan, menawarkan teknologi mutakhir dan kepraktisan yang sangat tinggi.",
+            "tooltipsdesc": "Badminton Tournament with the community",
             "xPos": 29,
             "yPos": 87,
             "xPosInner": 91,
@@ -3034,6 +3041,857 @@ $(function() {
             "yPath":"49",
             "xPathInner":"-300",
             "yPathInner":"-3",
+        },
+        {
+            "month": "June",
+            "date": "30",
+            "event": "River rehabilitation & symbolic tree planting",
+            "location": "Pasir Gudang, Johor",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": true,
+            "tooltipicon": [14],
+            "tooltipsdesc": "River rehabilitation & symbolic tree planting",
+            "xPos": 26.3,
+            "yPos": 87,
+            "xPosInner": 78,
+            "yPosInner": 89,
+            "completed": true,
+            "path": "assets/img/map/pathroad-12.svg",
+            "xPath":"65",
+            "yPath":"0",
+            "xPathInner":"90",
+            "yPathInner":"0",
+        },
+        {
+            "month": "July",
+            "date": "4",
+            // "date": "TBC",
+            "event": "Career Day at Kimanis Petroleum Centre (KTC)",
+            "location": "Kimanis, Sabah",
+            "region": "Sabah & Sarawak",
+            "istorch": true,
+            "istorchcompleted": false,
+            "tooltipicon": [21],
+            "tooltipsdesc": "Career Day at Kimanis Petroleum Centre (KTC)",
+            "xPos": 74,
+            "yPos": 26,
+            "xPosInner": 61.7,
+            "yPosInner": 27,
+            "completed": true,
+            "path": "assets/img/map/pathroad-13.svg",
+            "xPath":"120",
+            "yPath":"20",
+            "xPathInner":"110",
+            "yPathInner":"60",
+        },
+        {
+            "month": "July",
+            "date": "13",
+            // "date": "TBC",
+            "event": "YP Empower ECER skill training & entrepreneurship development",
+            "location": "Mersing, Johor",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": true,
+            "tooltipicon": [10],
+            "tooltipsdesc": "YP Empower ECER skill training & entrepreneurship development",
+            "xPos": 26,
+            "yPos": 69,
+            "xPosInner": 75,
+            "yPosInner": 70,
+            "completed": true,
+            "path": "assets/img/map/pathroad-14.svg",
+            "xPath":"-50",
+            "yPath":"-350",
+            "xPathInner":"-50",
+            "yPathInner":"-370",
+        },
+        {
+            "month": "July",
+            // "date": "13-15",
+            "date": "TBC",
+            "event": "MTBE&PDB: XPDC PETRONAS 50<br/>Convoy from PS Bandar Rompin to PS Kotasas",
+            "location": "Kuantan, Pahang",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [5],
+            "tooltipicon": [24],
+            "tooltipsdesc": "<p>MTBE&PDB: XPDC PETRONAS 50</p>Convoy from PS Bandar Rompin to PS Kotasas",
+            "xPos": 24,
+            "yPos": 60,
+            "xPosInner": 64,
+            "yPosInner": 57,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "July",
+            "date": "14",
+            // "date": "TBC",
+            "event": "Kota Sultan Ahmad Shah (KotaSAS) PETRONAS station launch",
+            "location": "Kuantan, Pahang",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [5],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Kota Sultan Ahmad Shah (KotaSAS) PETRONAS station launch",
+            "xPos": 23,
+            "yPos": 53,
+            "xPosInner": 58,
+            "yPosInner": 47,
+            "completed": true,
+            "path": "assets/img/map/pathroad-15.svg",
+            "xPath":"-20",
+            "yPath":"-370",
+            "xPathInner":"-40",
+            "yPathInner":"-440",
+        },
+        {
+            "month": "July",
+            "date": "16",
+            // "date": "TBC",
+            "event": "PETRONAS Chemicals Fertiliser Sabah Sdn Bhd (PC&nbsp;FSSB) Run",
+            "location": "Sipitang, Sabah",
+            "region": "Sabah & Sarawak",
+            "istorch": true,
+            "istorchcompleted": false,
+            "tooltipicon": [18],
+            "tooltipsdesc": "PETRONAS Chemicals Fertiliser Sabah Sdn Bhd (PC&nbsp;FSSB) Run",
+            "xPos": 75,
+            "yPos": 32,
+            "xPosInner": 64,
+            "yPosInner": 32,
+            "completed": true,
+            "path": "assets/img/map/pathroad-16.svg",
+            "xPath":"30",
+            "yPath":"40",
+            "xPathInner":"0",
+            "yPathInner":"60",
+        },
+        {
+            "month": "July",
+            "date": "19",
+            // "date": "TBC",
+            "event": "Candat sotong with Terengganu key stakeholders",
+            "location": "Kuala Terengganu, Terengganu",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [6],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Candat sotong with Terengganu key stakeholders",
+            "xPos": 22.5,
+            "yPos": 30,
+            "xPosInner": 56,
+            "yPosInner": 20,
+            "completed": true,
+            "path": "assets/img/map/pathroad-18.svg",
+            "xPath":"-70",
+            "yPath":"-480",
+            "xPathInner":"-100",
+            "yPathInner":"-510",
+        },
+        {
+            "month": "July",
+            // "date": "21",
+            "date": "TBC",
+            "event": "Meet with 2<sup>nd</sup> generation dealer for the 1<sup>st</sup> PS in Terengganu",
+            "location": "Dungun, Terengganu",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [5],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Meet with 2<sup>nd</sup> generation dealer for the 1<sup>st</sup> PS in Terengganu",
+            "xPos": 24,
+            "yPos": 43,
+            "xPosInner": 65,
+            "yPosInner": 37,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "July",
+            "date": "22",
+            // "date": "TBC",
+            "event": "Tribute Dulang & Duyong",
+            "location": "Kerteh, Terengganu",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [3],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Tribute Dulang & Duyong",
+            "xPos": 24,
+            "yPos": 35,
+            "xPosInner": 64,
+            "yPosInner": 25,
+            "completed": true,
+            "path": "assets/img/map/pathroad-19.svg",
+            "xPath":"-80",
+            "yPath":"100",
+            "xPathInner":"-100",
+            "yPathInner":"50",
+        },
+        {
+            "month": "July",
+            // "date": "25",
+            "date": "TBC",
+            "event": "SSGP Tulip",
+            "location": "Lawas",
+            "region": "Sabah & Sarawak",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [1],
+            "tooltipicon": [24],
+            "tooltipsdesc": "SSGP Tulip",
+            "xPos": 72,
+            "yPos": 36,
+            "xPosInner": 59,
+            "yPosInner": 36,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "July",
+            "date": "27",
+            // "date": "TBC",
+            "event": "Miri Amazing Race",
+            "location": "Miri, Sarawak",
+            "region": "Sabah & Sarawak",
+            "istorch": true,
+            "istorchcompleted": false,
+            // "tooltipicon": [18],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Miri Amazing Race",
+            "xPos": 64,
+            "yPos": 44,
+            "xPosInner": 45,
+            "yPosInner": 44,
+            "completed": true,
+            "path": "assets/img/map/pathroad-21.svg",
+            "xPath":"130",
+            "yPath":"40",
+            "xPathInner":"90",
+            "yPathInner":"40",
+        },
+        {
+            "month": "July",
+            "date": "27",
+            // "date": "TBC",
+            "event": "PETRONAS Family Wellness Day",
+            "location": "Kerteh, Terengganu",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [7],
+            "tooltipicon": [24],
+            "tooltipsdesc": "PETRONAS Family Wellness Day",
+            "xPos": 23,
+            "yPos": 42,
+            "xPosInner": 57,
+            "yPosInner": 34,
+            "completed": true,
+            "path": "assets/img/map/pathroad-20.svg",
+            "xPath":"0",
+            "yPath":"50",
+            "xPathInner":"0",
+            "yPathInner":"70",
+        },
+        {
+            "month": "July",
+            "date": "28",
+            // "date": "TBC",
+            "event": "Badminton Clinic",
+            "location": "Sibu, Sarawak",
+            "region": "Sabah & Sarawak",
+            "istorch": true,
+            "istorchcompleted": false,
+            // "tooltipicon": [11],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Badminton Clinic",
+            "xPos": 52,
+            "yPos": 67,
+            "xPosInner": 25,
+            "yPosInner": 67,
+            "completed": true,
+            "path": "assets/img/map/pathroad-22.svg",
+            "xPath":"150",
+            "yPath":"60",
+            "xPathInner":"120",
+            "yPathInner":"60",
+        },
+        {
+          "month": "Aug",
+          "date": "1",
+          // "date": "TBC",
+          "event": "Rehlah with PETRONAS Penapisan Terengganu Sdn. Bhd, PP(T)SB Contractors",
+          "location": "Kerteh, Terengganu",
+          "region": "Southern & East Coast",
+          "istorch": false,
+          "istorchcompleted": true,
+          // "tooltipicon": [2],
+          "tooltipicon": [24],
+          "tooltipsdesc": "Rehlah with PETRONAS Penapisan Terengganu Sdn. Bhd, PP(T)SB Contractors",
+          "xPos": 24.9,
+          "yPos": 47,
+          "xPosInner": 67,
+          "yPosInner": 39,
+          "completed": true,
+          "path": "assets/img/map/pathroad-23.svg",
+          "xPath":"-90",
+          "yPath":"110",
+          "xPathInner":"-100",
+          "yPathInner":"120",
+        },
+        {
+            "month": "Aug",
+            "date": "3",
+            // "date": "TBC",
+            "event": "Orchid Run & Ride",
+            "location": "Tg. Kidurong, Bintulu, Sarawak",
+            "region": "Sabah & Sarawak",
+            "istorch": true,
+            "istorchcompleted": false,
+            // "tooltipicon": [7,17],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Orchid Run & Ride",
+            "xPos": 61,
+            "yPos": 54,
+            "xPosInner": 40,
+            "yPosInner": 54,
+            "completed": true,
+            "path": "assets/img/map/pathroad-24.svg",
+            "xPath":"-410",
+            "yPath":"-280",
+            "xPathInner":"-360",
+            "yPathInner":"-290",
+        },
+        {
+            "month": "Aug",
+            "date": "3",
+            // "date": "TBC",
+            "event": "VFO Launching",
+            "location": "Pulau Sebatik, Tawau, Sabah",
+            "region": "Sabah & Sarawak",
+            "istorch": true,
+            "istorchcompleted": false,
+            "tooltipicon": [10],
+            "tooltipsdesc": "VFO Launching",
+            "xPos": 90,
+            "yPos": 43,
+            "xPosInner": 88,
+            "yPosInner": 43,
+            "completed": true,
+            "path": "assets/img/map/pathroad-25.svg",
+            "xPath":"-2080",
+            "yPath":"-560",
+            "xPathInner":"-2030",
+            "yPathInner":"-570",
+        },
+        {
+            "month": "Aug",
+            // "date": "6",
+            "date": "TBC",
+            "event": "Launch of Energy Gallery at Muzium Negeri Terengganu",
+            "location": "Kuala Terengganu, Terengganu",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [9],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Launch of Energy Gallery at Muzium Negeri Terengganu",
+            "xPos": 23,
+            "yPos": 30,
+            "xPosInner": 56,
+            "yPosInner": 18,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            "date": "7",
+            // "date": "TBC",
+            "event": "Discover PETRONAS @ Schools",
+            "location": "Sri Aman, Sarawak",
+            "region": "Sabah & Sarawak",
+            "istorch": true,
+            "istorchcompleted": false,
+            // "tooltipicon": [10],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Discover PETRONAS @ Schools",
+            "xPos": 47,
+            "yPos": 85,
+            "xPosInner": 15,
+            "yPosInner": 85,
+            "completed": true,
+            "path": "assets/img/map/pathroad-26.svg",
+            "xPath":"110",
+            "yPath":"20",
+            "xPathInner":"100",
+            "yPathInner":"30",
+        },
+        {
+            "month": "Aug",
+            //"date": "6-7",
+            "date": "TBC",
+            "event": "Activation at PCFK",
+            "location": "Gurun",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [1],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Activation at PCFK",
+            "xPos": 7,
+            "yPos": 19,
+            "xPosInner": 32,
+            "yPosInner": 14,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            "date": "8",
+            // "date": "TBC",
+            "event": "Discover & Explore Institut Teknologi Petroleum PETRONAS (INSTEP)",
+            "location": "Batu Rakit, Terengganu",
+            "region": "Southern & East Coast",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [10],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Discover & Explore Institut Teknologi Petroleum PETRONAS (INSTEP)",
+            "xPos": 20.5,
+            "yPos": 25,
+            "xPosInner": 45,
+            "yPosInner": 14,
+            "completed": true,
+            "path": "assets/img/map/pathroad-27.svg",
+            "xPath":"20",
+            "yPath":"-380",
+            "xPathInner":"40",
+            "yPathInner":"-460",
+        },
+        {
+          "month": "Aug",
+          "date": "9",
+          // "date": "TBC",
+          "event": "BeDigital Bootcamp",
+          "location": "Kuching, Sarawak",
+          "region": "Sabah & Sarawak",
+          "istorch": true,
+          "istorchcompleted": false,
+          // "tooltipicon": [20],
+          "tooltipicon": [24],
+          "tooltipsdesc": "BeDigital Bootcamp",
+          // "tooltipsdesc": "PETRONAS Youth Cup and Hunt for Acceleration",
+          "xPos": 40,
+          "yPos": 84,
+          "xPosInner": 4,
+          "yPosInner": 84,
+          "completed": true,
+          "path": "assets/img/map/pathroad-28.svg",
+          "xPath":"120",
+          "yPath":"0",
+          "xPathInner":"100",
+          "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            // "date": "10",
+            "date": "TBC",
+            "event": "Acceleration Hunt",
+            "location": "Kuching",
+            "region": "Sabah & Sarawak",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [20],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Acceleration Hunt",
+            // "tooltipsdesc": "PETRONAS Youth Cup and Hunt for Acceleration",
+            "xPos": 40,
+            "yPos": 84,
+            "xPosInner": 4,
+            "yPosInner": 84,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            // "date": "11",
+            "date": "TBC",
+            "event": "PETRONAS Youth Cup",
+            "location": "Kuching",
+            "region": "Sabah & Sarawak",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [20],
+            "tooltipicon": [24],
+            "tooltipsdesc": "PETRONAS Youth Cup",
+            // "tooltipsdesc": "PETRONAS Youth Cup and Hunt for Acceleration",
+            "xPos": 41,
+            "yPos": 88,
+            "xPosInner": 5,
+            "yPosInner": 88,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            //"date": "10-22",
+            "date": "TBC",
+            "event": "The Carnival at KLCC Esplanade",
+            "location": "Kuala Lumpur",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [15],
+            "tooltipicon": [24],
+            "tooltipsdesc": "The Carnival at KLCC Esplanade",
+            "xPos": 14,
+            "yPos": 56,
+            "xPosInner": 61,
+            "yPosInner": 70,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        
+        {
+          "month": "Aug",
+          "date": "12",
+          // "date": "TBC",
+          "event": "Legends @ 40 – PETRONAS Gas Berhad 40 Years",
+          "location": "Kerteh, Terengganu",
+          "region": "Southern & East Coast",
+          "istorch": false,
+          "istorchcompleted": true,
+          // "tooltipicon": [2],
+          "tooltipicon": [24],
+          "tooltipsdesc": "Legends @ 40 – PETRONAS Gas Berhad 40 Years",
+          "xPos": 25,
+          "yPos": 39,
+          "xPosInner": 67,
+          "yPosInner": 30,
+          "completed": true,
+          "path": "assets/img/map/pathroad-29.svg",
+          "xPath":"-270",
+          "yPath":"40",
+          "xPathInner":"-290",
+          "yPathInner":"70",
+        },
+        {
+            "month": "Aug",
+            "date": "17",
+            // "date": "TBC",
+            "event": "Kuala Lumpur Family Outing",
+            "location": "Kuala Lumpur City Centre",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [7],
+            "tooltipicon": [24],
+            // "tooltipsdesc": "<p>Wellness Week:</p>16 Aug: Spiritual & Mental wellness<br/>17 Aug: Family Day<br/>18 Aug: Wellness & sports",
+            "tooltipsdesc": "Kuala Lumpur Family Outing",
+            "xPos": 12,
+            "yPos": 61,
+            "xPosInner": 55,
+            "yPosInner": 74,
+            "completed": true,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            //"date": "17-24",
+            "date": "TBC",
+            "event": "Energy River activation",
+            "location": "Kuching",
+            "region": "Sabah & Sarawak",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [22],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Energy River activation",
+            "xPos": 43,
+            "yPos": 86,
+            "xPosInner": 9,
+            "yPosInner": 86,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            //"date": "17",
+            "date": "TBC",
+            "event": "Twin Torches Unite",
+            "location": "Kuala Lumpur",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [23],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Twin Torches Unite",
+            "xPos": 14,
+            "yPos": 62,
+            "xPosInner": 62,
+            "yPosInner": 75,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            // "date": "24",
+            "date": "TBC",
+            "event": "Customer Appreciation Dinner",
+            "location": "Grand Ballroom, Kuala Lumpur Convention Centre",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [21],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Customer Appreciation Dinner",
+            "xPos": 12,
+            "yPos": 56,
+            "xPosInner": 54,
+            "yPosInner": 69,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Aug",
+            // "date": "25",
+            "date": "TBC",
+            "event": "Networking Golf",
+            "location": "Saujana Subang Golf Club",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [21],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Networking Golf",
+            "xPos": 13.5,
+            "yPos": 59,
+            "xPosInner": 60,
+            "yPosInner": 72,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Sep",
+            "date": "2",
+            // "date": "TBC",
+            "event": "Drone Symposium",
+            "location": "Bangi",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [12],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Drone Symposium",
+            "xPos": 15,
+            "yPos": 69,
+            "xPosInner": 68,
+            "yPosInner": 85,
+            "completed": true,
+            "path": "assets/img/map/pathroad-30.svg",
+            "xPath":"-150",
+            "yPath":"60",
+            "xPathInner":"-160",
+            "yPathInner":"110",
+        },
+        {
+            "month": "Sep",
+            //"date": "13-14",
+            "date": "TBC",
+            "event": "Youth and Kids Camp at PLC and PRSB",
+            "location": "Bangi",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [10],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Youth and Kids Camp at PLC and PRSB",
+            "xPos": 14,
+            "yPos": 71,
+            "xPosInner": 66,
+            "yPosInner": 90,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Sep",
+            //"date": "18-19",
+            "date": "24",
+            // "date": "TBC",
+            "event": "Yayasan PETRONAS Duta Guru",
+            "location": "Kuala Selangor, Selangor",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [10],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Yayasan PETRONAS Duta Guru",
+            "xPos": 9,
+            "yPos": 53,
+            "xPosInner": 38,
+            "yPosInner": 67,
+            "completed": true,
+            "path": "assets/img/map/pathroad-31.svg",
+            "xPath":"50",
+            "yPath":"-70",
+            "xPathInner":"67",
+            "yPathInner":"-70",
+        },
+        {
+            "month": "Sep",
+            "date": "26",
+            // "date": "TBC",
+            "event": "Discover PETRONAS @ Schools",
+            "location": "Nibong Tebal",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [10],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Discover PETRONAS @ Schools",
+            "xPos": 7,
+            "yPos": 32,
+            "xPosInner": 24,
+            "yPosInner": 33,
+            "completed": true,
+            "path": "assets/img/map/pathroad-32.svg",
+            "xPath":"10",
+            "yPath":"-450",
+            "xPathInner":"70",
+            "yPathInner":"-540",
+        },
+        {
+            "month": "Oct",
+            // "date": "10",
+            "date": "TBC",
+            "event": "Alumni Hi-Tea Appreciation",
+            "location": "PETRONAS Chemicals Fertiliser, Gurun, Kedah",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": false,
+            // "tooltipicon": [17],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Alumni Hi-Tea Appreciation",
+            "xPos": 7,
+            "yPos": 21,
+            "xPosInner": 27,
+            "yPosInner": 16,
+            "completed": false,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Oct",
+            "date": "20",
+            // "date": "TBC",
+            "event": "Orchid Run and Ride",
+            "location": "Kuala Lumpur",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [17],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Orchid Run and Ride",
+            "xPos": 13.5,
+            "yPos": 63,
+            "xPosInner": 58,
+            "yPosInner": 80,
+            "completed": true,
+            "path": "",
+            "xPath":"0",
+            "yPath":"0",
+            "xPathInner":"0",
+            "yPathInner":"0",
+        },
+        {
+            "month": "Oct",
+            "date": "27",
+            // "date": "TBC",
+            "event": "Universiti Teknologi PETRONAS (UTP) Graduation Day",
+            "location": "Bandar Seri Iskandar, Perak",
+            "region": "Northern & Central",
+            "istorch": false,
+            "istorchcompleted": true,
+            // "tooltipicon": [10],
+            "tooltipicon": [24],
+            "tooltipsdesc": "Universiti Teknologi PETRONAS (UTP) Graduation Day",
+            "xPos": 10,
+            "yPos": 37,
+            "xPosInner": 42,
+            "yPosInner": 47,
+            "completed": true,
+            "path": "assets/img/map/pathroad-33.svg",
+            "xPath":"-180",
+            "yPath":"0",
+            "xPathInner":"-240",
+            "yPathInner":"120",
         },
     ]
     },
@@ -3205,15 +4063,13 @@ $(function() {
   function generateMapTable() {
     var $table = $('<table>').attr('border', '0');
     var $thead = $('<thead>').appendTo($table);
-    $thead.append('<tr><th>Product</th><th>Description</th><th>Function</th><th>Technology</th><th></th><th></th></tr>');
+    $thead.append('<tr><th>Name</th><th>Description</th><th>Function & Technology</th></tr>');
 
     var $tbody = $('<tbody>').appendTo($table);
-    var shownMonths = {}; // Reset shownMonths for each region
-    
-    var monthsToShow = ["ELJE EL POWER SERIES 10-800kVA", "ELJE EL POWER SE-T SERIES 10-800kVA", "ELX SERIES 1-10kVA", "ELJE JE-R 1-3kVA SERIES", "ELJE JE-R 6-10kVA SERIES", "ELJE JE-R SERIES", "ELJE ELS 31 SERIES", "ELJE ELS SERIES 1kVA-20kVA", "ELJE MIKRO SERIES", "ELJE ELPRO Series 1kVA-3kVA", "ELJE ELPRO Series 6kVA-10kVA", "ELJE SE Series 10-40KVA", "ELJE SE Series 50-200KVA"  ];
+    var showDetail = {}; // Reset shownMonths for each region
 
     $.each(data, function(index, item) {
-        let newMonth = item.month.toLowerCase();
+        let newDetail = item.detail.toLowerCase();
         let newRegion = item.region.replace(/\s+/g, '-').toLowerCase();
         var istorch = item.istorch ? 'istorch' : 'notorch';
         var istorchcompleted = item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted';
@@ -3222,14 +4078,14 @@ $(function() {
 
         var $row = $('<tr data-link="'+location+newMonth+index+'" style="'+iscompleted+'">').appendTo($tbody);
         
-        if (monthsToShow.includes(item.month)) {
+        if (detailToShow.includes(item.detail)) {
           if (item.date != "TBC") {
             // if(date == 'TBC') {
             //     $row.append('<td><div class="">Coming Soon</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></div></td>');
             // } else {
             //     $row.append('<td><div class="">'+item.month+' '+item.date+'</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></div></td>');
             // }
-            $row.append('<td><div class="">'+item.month+' '+item.date+'</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></div></td>');
+            $row.append('<td><div class="">'+item.detail+' '+item.date+'</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></div></td>');
             $row.append('<td><div class="">'+item.event+'</div><div class="p50cS1TableMobile"><p>'+item.location+'</p><p>'+item.region+'</p></div></td>');
             $row.append('<td><div class="">'+item.location+'</div></td>');
             $row.append('<td><div class="">'+item.region+'</div></td>');
@@ -3244,16 +4100,16 @@ $(function() {
             $td.append($projectinner);
             $row.append($td);
 
-            $row.append('<td><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></td>');
+            $row.append('<td><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newDetail+'"></i></div></td>');
           }
         }
         else 
         {
-          if (!shownMonths[item.month]) 
+          if (!shownDetail[item.detail]) 
           {
-              $row.append('<td><div class="">'+item.month+'</div><div class="p50cS1TableMobile"></div></td>');
+              $row.append('<td><div class="">'+item.detail+'</div><div class="p50cS1TableMobile"></div></td>');
               $row.append('<td colspan="5"><div class="">Coming Soon</div></td>');
-              shownMonths[item.month] = true;
+              shownDetail[item.detail] = true;
           }
         }
     });
@@ -3262,28 +4118,28 @@ $(function() {
 
     $.each(regions, function(region, items) {
         var $table02 = $('<table>').attr('border', '0');
-        $table02.append('<thead><tr><th>Date</th><th>Event</th><th>Location</th><th>Region</th><th>Icon</th><th>Indicator</th></tr></thead>');
+        $table02.append('<thead><tr><th>Name</th><th>Description</th><th>Function & Technology</th></tr></thead>');
         var $tbody = $('<tbody>').appendTo($table02);
 
-        var shownMonths = {}; // Reset shownMonths for each region
+        var shownDetails = {}; // Reset shownMonths for each region
 
         items.forEach(function(item, index) {
-            let newMonth = item.month.toLowerCase();
+            let newDetail = item.detail.toLowerCase();
             let newRegion = item.region.replace(/\s+/g, '-').toLowerCase();
             var istorch = item.istorch ? 'istorch' : 'notorch';
             var istorchcompleted = item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted';
             var iscompleted = item.completed ? 'opacity:0.6;' : 'opacity:1;';
             let date = item.date;
-            var $row = $('<tr data-link="'+newRegion+newMonth+index+'" style="'+iscompleted+'">').appendTo($tbody);
+            var $row = $('<tr data-link="'+newRegion+newDetail+index+'" style="'+iscompleted+'">').appendTo($tbody);
 
-            if (monthsToShow.includes(item.month)) {
+            if (detailToShow.includes(item.detail)) {
               if (item.date != "TBC") {
                 // if(date == 'TBC') {
                 //     $row.append('<td><div class="">Coming Soon</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></div></td>');
                 // } else {
                 //     $row.append('<td><div class="">'+item.month+' '+item.date+'</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></div></td>');
                 // }
-                $row.append('<td><div class="">'+item.month+' '+item.date+'</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></div></td>');
+                $row.append('<td><div class="">'+item.detail+' '+'</div><div class="p50cS1TableMobile"><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newDetail+'"></i></div></div></td>');
                 $row.append('<td><div class="">'+item.event+'</div><div class="p50cS1TableMobile"><p>'+item.location+'</p><p>'+item.region+'</p></div></td>');
                 $row.append('<td><div class="">'+item.location+'</div></td>');
                 $row.append('<td><div class="">'+item.region+'</div></td>');
@@ -3297,24 +4153,24 @@ $(function() {
                 $td.append($projectinner);
                 $row.append($td);
 
-                $row.append('<td><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newMonth+'"></i></div></td>');
+                $row.append('<td><div class=" '+istorch+' '+istorchcompleted+'"><i class="'+newDetail+'"></i></div></td>');
               }
 
             } else {
-                if (!shownMonths[item.month]) {
-                    $row.append('<td><div class="">'+item.month+'</div><div class="p50cS1TableMobile"></div></td>');
+                if (!shownDetails[item.detail]) {
+                    $row.append('<td><div class="">'+item.detail+'</div><div class="p50cS1TableMobile"></div></td>');
                     $row.append('<td colspan="5"><div class="">Coming Soon</div></td>');
-                    shownMonths[item.month] = true;
+                    shownDetails[item.detail] = true;
                 }
             }
         });
 
         if(region == "Sabah & Sarawak") {
-          $('.p50cS1ContentTable .torch1').empty().append($table02);
-      } else if(region == "Southern & East Coast") {
-          $('.p50cS1ContentTable .torch2').empty().append($table02);
-      } else if(region == "Northern & Central") {
-          $('.p50cS1ContentTable .torch3').empty().append($table02);;
+            $('.p50cS1ContentTable .torch1').empty().append($table02);
+        } else if(region == "Southern & East Coast") {
+            $('.p50cS1ContentTable .torch2').empty().append($table02);
+        } else if(region == "Northern & Central") {
+            $('.p50cS1ContentTable .torch3').empty().append($table02);
         }
     });
 }
@@ -3329,13 +4185,13 @@ $(function() {
 
     // ALL
     $.each(data, function(index, item) {
-      let newMonth = item.month.toLowerCase();
+      let newDetail = item.detail.toLowerCase();
       let newRegion = item.region.replace(/\s+/g, '-').toLowerCase();
       // let newLocation02 = newLocation.replace(/\./g, '');
 
       let date = item.date;
 
-      var torchClass = item.month + ' ' + (item.istorch ? 'istorch' : 'notorch') + ' ' + (item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted');
+      var torchClass = item.detail + ' ' + (item.istorch ? 'istorch' : 'notorch') + ' ' + (item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted');
       var istorch = item.istorch ? 'istorch' : 'notorch';
       var istorchcompleted = item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted';
       var iscompleted = item.completed ? 'opacity:0.6;' : 'opacity:1;';
@@ -3343,9 +4199,8 @@ $(function() {
       var xPos = item.xPos + '%';
       var yPos = item.yPos + '%';
       
-      if ((item.month == "Apr" || item.month == "May" || item.month == "June" || item.month == "July" || item.month == "Aug" || item.month == "Sep" || item.month == "Oct") && (item.date != 'TBC')) 
       {
-        var $itemDiv = $('<div data-link="'+location+newMonth+index+'" style="left: '+xPos+'; top: '+yPos+'; " class="'+newMonth+' '+istorch+' '+istorchcompleted+'">', {
+        var $itemDiv = $('<div data-link="'+location+newDetail+index+'" style="left: '+xPos+'; top: '+yPos+'; " class="'+newDetail+' '+istorch+' '+istorchcompleted+'">', {
             'class': torchClass,
             'style': 'position: absolute; left: ' + item.xPos + '%; top: ' + item.yPos + '%;' // Adjusting position based on item properties
         }).appendTo(container);
@@ -3376,7 +4231,7 @@ $(function() {
 
       if(date !== 'TBC'){
         var $tooltipsDate = $('<div>', { 'class': 'torchTooltipsDate' }).appendTo($tooltipsinner);
-        $tooltipsDate.append('<p>' + item.month + '</p><p>' + item.date + '</p>');
+        $tooltipsDate.append('<p>' + item.detail + '</p><p>' + item.date + '</p>');
       }
 
       if(date == 'TBC'){
@@ -3419,20 +4274,19 @@ $(function() {
         // console.log('no more')
       }
       items.forEach(function(item, index) {
-        let newMonth = item.month.toLowerCase();
+        let newDetail = item.detail.toLowerCase();
         let newRegion = item.region.replace(/\s+/g, '-').toLowerCase();
 
         let date = item.date;
 
-        var torchClass = item.month + ' ' + (item.istorch ? 'istorch' : 'notorch') + ' ' + (item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted');
+        var torchClass = item.detail + ' ' + (item.istorch ? 'istorch' : 'notorch') + ' ' + (item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted');
         var istorch = item.istorch ? 'istorch' : 'notorch';
         var istorchcompleted = item.istorchcompleted ? 'istorchcompleted' : 'notorchcompleted';
         var iscompleted = item.completed ? 'opacity:0.6;' : 'opacity:1;';
-
+        
         var xPos = item.xPosInner + '%';
         var yPos = item.yPosInner + '%';
-
-        if ((item.month == "Apr" || item.month == "May" || item.month == "June" || item.month == "July" || item.month == "Aug" || item.month == "Sep" || item.month == "Oct") && (item.date != 'TBC')) 
+         
         {
           var $itemDiv = $('<div data-link="'+newRegion+newMonth+index+'" style="left: '+xPos+'; top: '+yPos+'" class="'+newMonth+' '+istorch+' '+istorchcompleted+'">', {
               'class': torchClass,
@@ -3454,7 +4308,7 @@ $(function() {
           $tooltipsDate.append('<p class="tbc">' + item.date + '</p>');
         } else {
           var $tooltipsDate = $('<div>', { 'class': 'torchTooltipsDate' }).appendTo($tooltipsinner);
-          $tooltipsDate.append('<p>' + item.month + '</p><p>' + item.date + '</p>');
+          $tooltipsDate.append('<p>' + item.detail + '</p><p>' + item.date + '</p>');
         }
 
         if(date == 'TBC'){
